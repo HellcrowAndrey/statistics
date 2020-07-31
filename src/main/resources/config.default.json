@@ -10,6 +10,7 @@
     "DdlAuto": "none"
   },
   "EurekaConfig": {
+    "EurekaUrl": "http://localhost:3000/eureka",
     "InstanceId": "statistics-golang",
     "HostName": "127.0.0.1",
     "SecurePort": 8443,
@@ -19,6 +20,6 @@
     "HomePageUrl": "http://127.0.0.1:8080/",
     "StatusPageUrl": "http://127.0.0.1:8080/info",
     "HealthCheckUrl": "http://127.0.0.1:8080/health",
-    "EnableEureka": false
+    "EnableEureka": true
   }
 }
