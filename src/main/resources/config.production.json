@@ -1,0 +1,14 @@
+{
+  "Enable" : true,
+  "ServerPort" : "8080",
+  "Host" : "localhost",
+  "Port" : 5432,
+  "User" : "user",
+  "Password" : "password",
+  "Dbname" : "example.db",
+  "EurekaUrl": "http://localhost:3000/eureka",
+  "InstanceName": "golang-project",
+  "AppName": "people",
+  "EnableEureka": false,
+  "DdlAuto": "none"
+}

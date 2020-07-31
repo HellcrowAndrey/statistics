@@ -1,0 +1,26 @@
+package config
+
+import (
+	"fmt"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"log"
+	"os"
+	"time"
+)
+
+func ConnectDatabase(config *Config) (*gorm.DB, error) {
+	url := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		config.Host, config.Port, config.User, config.Password, config.Dbname)
+	connection, err := gorm.Open("postgres", url)
+	if err != nil {
+		panic(err.Error())
+	}
+	database := connection.DB()
+	db := connection.LogMode(true)
+	db.SetLogger(log.New(os.Stdout, "\r\n", 0))
+	database.SetMaxIdleConns(10)
+	database.SetMaxOpenConns(100)
+	database.SetConnMaxLifetime(time.Hour)
+	return connection, err
+}
