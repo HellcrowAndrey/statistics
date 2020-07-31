@@ -18,8 +18,11 @@ func NewEurekaService(config *config.Config) *EurekaService {
 func (service *EurekaService) Run() {
 	instance := service.createInstance()
 	connection := fargo.NewConn("http://localhost:3000/eureka")
-	connection.DeregisterInstance(&instance)
-	err := connection.RegisterInstance(&instance)
+	err := connection.DeregisterInstance(&instance)
+	if err != nil {
+		panic("Can not connect to eureka.")
+	}
+	err = connection.RegisterInstance(&instance)
 	if err != nil {
 		panic("Can not connect to eureka.")
 	} else {

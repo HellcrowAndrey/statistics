@@ -10,7 +10,7 @@ type RestHandler struct {
 	accountHandler  *AccountsHandler
 	purchaseHandler *PurchasesHandler
 	loginHandler    *LoginHandler
-	viewsHandler *ViewsHandler
+	viewsHandler    *ViewsHandler
 }
 
 func NewRestHandler(accountHandler *AccountsHandler, purchaseHandler *PurchasesHandler, loginHandler *LoginHandler, viewsHandler *ViewsHandler) *RestHandler {
@@ -20,22 +20,22 @@ func NewRestHandler(accountHandler *AccountsHandler, purchaseHandler *PurchasesH
 func (handler *RestHandler) Handler() http.Handler {
 	router := mux.NewRouter()
 	router.
-		HandleFunc("/accounts/{userId}", handler.accountHandler.GetByUserId).
+		HandleFunc("/v1/accounts/{userId}", handler.accountHandler.GetByUserId).
 		Methods("GET")
 	router.
-		HandleFunc("/accounts", handler.accountHandler.CreateAccount).
+		HandleFunc("/v1/accounts", handler.accountHandler.CreateAccount).
 		Methods("POST")
 	router.
-		HandleFunc("/purchase/{accountId}", handler.purchaseHandler.GetByAccountId).
+		HandleFunc("/v1/purchase/{accountId}", handler.purchaseHandler.GetByAccountId).
 		Methods("GET")
 	router.
-		HandleFunc("/purchase", handler.purchaseHandler.CreatePurchase).
+		HandleFunc("/v1/purchase", handler.purchaseHandler.CreatePurchase).
 		Methods("POST")
 	router.
-		HandleFunc("/logins", handler.loginHandler.GetByAccountId).
+		HandleFunc("/v1/logins", handler.loginHandler.GetByAccountId).
 		Methods("GET")
 	router.
-		HandleFunc("/logins", handler.loginHandler.CreateLogin).
+		HandleFunc("/v1/logins", handler.loginHandler.CreateLogin).
 		Methods("POST")
 	router.Use(loggingMiddleware)
 	http.Handle("/", router)
