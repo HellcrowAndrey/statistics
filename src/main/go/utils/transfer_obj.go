@@ -128,6 +128,7 @@ func ToPurchase(data *dto.PurchaseDto) *entity.Purchase {
 		Id:        data.Id,
 		CreatedAt: data.CreatedAt,
 		OrderId:   data.OrderId,
+		AccountId: data.AccountId,
 		Products:  products,
 	}
 }
@@ -136,6 +137,7 @@ func ToLogin(data *dto.LoginDto) *entity.Login {
 	return &entity.Login{
 		Id:        data.Id,
 		CreatedAt: data.CreatedAt,
+		AccountId: data.AccountId,
 		Ip:        data.Ip,
 		Device:    data.Device,
 		Location:  data.Location,
@@ -151,6 +153,7 @@ func ToView(data *dto.ViewDto) *entity.View {
 	return &entity.View{
 		Id:        data.Id,
 		CreatedAt: data.CreatedAt,
+		AccountId: data.AccountId,
 		Products:  products,
 	}
 }
