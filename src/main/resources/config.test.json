@@ -1,5 +1,5 @@
 {
-  "Enable": true,
+  "IsLoggerFile": false,
   "ServerPort": "8080",
   "DatabaseConfig": {
     "DatabaseHost": "localhost",

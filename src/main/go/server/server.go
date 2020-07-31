@@ -11,13 +11,14 @@ import (
 
 type Server struct {
 	config            *config.Config
+	logger            *config.Logger
 	handler           *handlers.RestHandler
 	eurekaService     *services.EurekaService
 	dataBaseContainer *migration.DataBaseMigration
 }
 
-func NewServer(config *config.Config, handler *handlers.RestHandler, eurekaService *services.EurekaService, dataBaseContainer *migration.DataBaseMigration) *Server {
-	return &Server{config: config, handler: handler, eurekaService: eurekaService, dataBaseContainer: dataBaseContainer}
+func NewServer(config *config.Config, logger *config.Logger, handler *handlers.RestHandler, eurekaService *services.EurekaService, dataBaseContainer *migration.DataBaseMigration) *Server {
+	return &Server{config: config, logger: logger, handler: handler, eurekaService: eurekaService, dataBaseContainer: dataBaseContainer}
 }
 
 func (server *Server) Run() {
@@ -25,6 +26,7 @@ func (server *Server) Run() {
 		Addr:    ":" + server.config.ServerPort,
 		Handler: server.handler.Handler(),
 	}
+	server.logger.InitLogger()
 	err := server.dataBaseContainer.RunBuildDataBase()
 	if server.config.EurekaConfig.EnableEureka {
 		go server.eurekaService.Run()

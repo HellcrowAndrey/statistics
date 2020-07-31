@@ -15,7 +15,7 @@ const (
 )
 
 type Config struct {
-	Enable         bool
+	IsLoggerFile   bool
 	ServerPort     string
 	DatabaseConfig DatabaseConfig
 	EurekaConfig   EurekaConfig
