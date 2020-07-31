@@ -5,10 +5,10 @@ import (
 )
 
 type AccountDto struct {
-	Id        uint
-	CreatedAt time.Time
-	UserId    uint
-	Purchases []*PurchaseDto
-	Logins    []*LoginDto
-	Views     []*ViewDto
+	Id        uint           `json:"id"`
+	CreatedAt time.Time      `json:"createAt"`
+	UserId    uint           `json:"userId"`
+	Purchases []*PurchaseDto `json:"purchases"`
+	Logins    []*LoginDto    `json:"logins"`
+	Views     []*ViewDto     `json:"views"`
 }

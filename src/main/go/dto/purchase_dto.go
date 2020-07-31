@@ -5,9 +5,9 @@ import (
 )
 
 type PurchaseDto struct {
-	Id uint
-	CreatedAt time.Time
-	OrderId uint
-	AccountId uint
-	Products  []*ProductDto
+	Id        uint          `json:"id"`
+	CreatedAt time.Time     `json:"createAt"`
+	OrderId   uint          `json:"orderId"`
+	AccountId uint          `json:"accountId"`
+	Products  []*ProductDto `json:"products"`
 }

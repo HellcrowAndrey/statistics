@@ -5,8 +5,8 @@ import (
 )
 
 type ViewDto struct {
-	Id        uint
-	CreatedAt time.Time
-	AccountId int64
-	Products  []*ProductDto
+	Id        uint          `json:"id"`
+	CreatedAt time.Time     `json:"createAt"`
+	AccountId int64         `json:"accountId"`
+	Products  []*ProductDto `json:"products"`
 }

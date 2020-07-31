@@ -5,10 +5,10 @@ import (
 )
 
 type LoginDto struct {
-	Id        uint
-	CreatedAt time.Time
-	AccountId int64
-	Ip        string
-	Device    string
-	Location  string
+	Id        uint      `json:"id"`
+	CreatedAt time.Time `json:"createAt"`
+	AccountId int64     `json:"accountId"`
+	Ip        string    `json:"ip"`
+	Device    string    `json:"device"`
+	Location  string    `json:"location"`
 }
