@@ -16,11 +16,11 @@ func NewDataBaseMigration(config *config.Config, connection *gorm.DB) *DataBaseM
 }
 
 func (container *DataBaseMigration) RunBuildDataBase() error {
-	switch container.config.DdlAuto {
+	switch container.config.DatabaseConfig.DdlAuto {
 	case "none":
 	case "create":
-	 	return createTables(container.connection)
-	 case "update":
+		return createTables(container.connection)
+	case "update":
 		return updateTables(container.connection)
 	}
 	return nil

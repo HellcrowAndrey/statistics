@@ -11,7 +11,12 @@ import (
 
 func ConnectDatabase(config *Config) (*gorm.DB, error) {
 	url := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		config.Host, config.Port, config.User, config.Password, config.Dbname)
+		config.DatabaseConfig.DatabaseHost,
+		config.DatabaseConfig.DatabasePort,
+		config.DatabaseConfig.DatabaseUser,
+		config.DatabaseConfig.DatabasePassword,
+		config.DatabaseConfig.DatabaseName,
+	)
 	connection, err := gorm.Open("postgres", url)
 	if err != nil {
 		panic(err.Error())

@@ -7,15 +7,33 @@ import (
 )
 
 type Config struct {
-	Enable       bool
-	ServerPort   string
-	Host         string
-	Port         int
-	User         string
-	Password     string
-	Dbname       string
-	EnableEureka bool
-	DdlAuto      string
+	Enable         bool
+	ServerPort     string
+	DatabaseConfig DatabaseConfig
+	EurekaConfig   EurekaConfig
+}
+
+type DatabaseConfig struct {
+	DatabaseHost     string
+	DatabasePort     int
+	DatabaseUser     string
+	DatabasePassword string
+	DatabaseName     string
+	DdlAuto          string
+}
+
+type EurekaConfig struct {
+	EurekaUrl      string
+	InstanceId     string
+	HostName       string
+	SecurePort     int
+	App            string
+	IPAddr         string
+	VipAddress     string
+	HomePageUrl    string
+	StatusPageUrl  string
+	HealthCheckUrl string
+	EnableEureka   bool
 }
 
 func NewConfig() *Config {

@@ -4,6 +4,7 @@ import (
 	"../config"
 	"github.com/hudl/fargo"
 	"log"
+	"strconv"
 	"time"
 )
 
@@ -17,7 +18,7 @@ func NewEurekaService(config *config.Config) *EurekaService {
 
 func (service *EurekaService) Run() {
 	instance := service.createInstance()
-	connection := fargo.NewConn("http://localhost:3000/eureka")
+	connection := fargo.NewConn(service.config.EurekaConfig.EurekaUrl)
 	err := connection.DeregisterInstance(&instance)
 	if err != nil {
 		panic("Can not connect to eureka.")
@@ -31,17 +32,18 @@ func (service *EurekaService) Run() {
 }
 
 func (service *EurekaService) createInstance() fargo.Instance {
+	port, _ := strconv.Atoi(service.config.ServerPort)
 	return fargo.Instance{
-		InstanceId:     "statistics-golang",
-		HostName:       "127.0.0.1",
-		Port:           8080,
-		SecurePort:     8443,
-		App:            "people",
-		IPAddr:         "127.0.0.1",
-		VipAddress:     "people",
-		HomePageUrl:    "http://127.0.0.1:8080/",
-		StatusPageUrl:  "http://127.0.0.1:8080/info",
-		HealthCheckUrl: "http://127.0.0.1:8080/health",
+		InstanceId:     service.config.EurekaConfig.InstanceId,
+		HostName:       service.config.EurekaConfig.HostName,
+		Port:           port,
+		SecurePort:     service.config.EurekaConfig.SecurePort,
+		App:            service.config.EurekaConfig.App,
+		IPAddr:         service.config.EurekaConfig.IPAddr,
+		VipAddress:     service.config.EurekaConfig.VipAddress,
+		HomePageUrl:    service.config.EurekaConfig.HomePageUrl,
+		StatusPageUrl:  service.config.EurekaConfig.StatusPageUrl,
+		HealthCheckUrl: service.config.EurekaConfig.HealthCheckUrl,
 		DataCenterInfo: fargo.DataCenterInfo{Name: fargo.MyOwn},
 		Status:         fargo.UP,
 		LeaseInfo: fargo.LeaseInfo{

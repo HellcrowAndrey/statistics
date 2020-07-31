@@ -26,7 +26,7 @@ func (server *Server) Run() {
 		Handler: server.handler.Handler(),
 	}
 	err := server.dataBaseContainer.RunBuildDataBase()
-	if server.config.EnableEureka {
+	if server.config.EurekaConfig.EnableEureka {
 		go server.eurekaService.Run()
 	}
 	err = httpServer.ListenAndServe()

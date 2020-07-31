@@ -1,14 +1,24 @@
 {
-  "Enable" : true,
-  "ServerPort" : "8080",
-  "Host" : "localhost",
-  "Port" : 5432,
-  "User" : "user",
-  "Password" : "password",
-  "Dbname" : "example.db",
-  "EurekaUrl": "http://localhost:3000/eureka",
-  "InstanceName": "golang-project",
-  "AppName": "people",
-  "EnableEureka": false,
-  "DdlAuto": "none"
+  "Enable": true,
+  "ServerPort": "8080",
+  "DatabaseConfig": {
+    "DatabaseHost": "localhost",
+    "DatabasePort": 5432,
+    "DatabaseUser": "user",
+    "DatabasePassword": "password",
+    "DatabaseName": "example.db",
+    "DdlAuto": "none"
+  },
+  "EurekaConfig": {
+    "InstanceId": "statistics-golang",
+    "HostName": "127.0.0.1",
+    "SecurePort": 8443,
+    "App": "statistics",
+    "IPAddr": "127.0.0.1",
+    "VipAddress": "statistics",
+    "HomePageUrl": "http://127.0.0.1:8080/",
+    "StatusPageUrl": "http://127.0.0.1:8080/info",
+    "HealthCheckUrl": "http://127.0.0.1:8080/health",
+    "EnableEureka": false
+  }
 }
