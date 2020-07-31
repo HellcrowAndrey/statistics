@@ -45,5 +45,5 @@ func (handler *PurchasesHandler) CreatePurchase(w http.ResponseWriter, r *http.R
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	ResponseSender(w, result, http.StatusOK)
+	ResponseSender(w, result, http.StatusCreated)
 }

@@ -10,7 +10,7 @@ import (
 )
 
 type LoginHandler struct {
- 	controller *controllers.LoginsController
+	controller *controllers.LoginsController
 }
 
 func NewLoginHandler(controller *controllers.LoginsController) *LoginHandler {
@@ -37,5 +37,5 @@ func (handler *LoginHandler) CreateLogin(w http.ResponseWriter, r *http.Request)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	ResponseSender(w, result, http.StatusOK)
+	ResponseSender(w, result, http.StatusCreated)
 }
