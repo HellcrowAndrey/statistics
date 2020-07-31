@@ -24,8 +24,8 @@ func ConnectDatabase(config *Config) (*gorm.DB, error) {
 	database := connection.DB()
 	db := connection.LogMode(true)
 	db.SetLogger(log.New(os.Stdout, "\r\n", 0))
-	database.SetMaxIdleConns(10)
-	database.SetMaxOpenConns(100)
+	database.SetMaxIdleConns(config.DatabaseConfig.MaxIdleConns)
+	database.SetMaxOpenConns(config.DatabaseConfig.MaxOpenConns)
 	database.SetConnMaxLifetime(time.Hour)
 	return connection, err
 }

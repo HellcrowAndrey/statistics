@@ -7,7 +7,9 @@
     "DatabaseUser": "user",
     "DatabasePassword": "password",
     "DatabaseName": "example.db",
-    "DdlAuto": "none"
+    "DdlAuto": "none",
+    "MaxIdleConns": 10,
+    "MaxOpenConns": 100
   },
   "EurekaConfig": {
     "EurekaUrl": "http://localhost:3000/eureka",

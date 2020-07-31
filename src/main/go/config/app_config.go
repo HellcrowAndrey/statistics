@@ -28,6 +28,8 @@ type DatabaseConfig struct {
 	DatabasePassword string
 	DatabaseName     string
 	DdlAuto          string
+	MaxIdleConns     int
+	MaxOpenConns     int
 }
 
 type EurekaConfig struct {
