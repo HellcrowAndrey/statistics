@@ -56,7 +56,7 @@ func NewConfig() *Config {
 		err = gonfig.GetConf("src/main/resources/config.production.json", &config)
 	case ProfileTest:
 		err = gonfig.GetConf("src/main/resources/config.production.json", &config)
-	case ProfileDefault, "":
+	case ProfileDefault:
 		err = gonfig.GetConf("src/main/resources/config.default.json", &config)
 	}
 	log.Println("Profile name:", profile, "Profile parameters:", config)
