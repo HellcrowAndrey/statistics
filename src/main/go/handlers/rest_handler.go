@@ -37,6 +37,12 @@ func (handler *RestHandler) Handler() http.Handler {
 	router.
 		HandleFunc("/v1/logins", handler.loginHandler.CreateLogin).
 		Methods("POST")
+	router.
+		HandleFunc("/v1/views/{accountId}", handler.viewsHandler.GetByAccountId).
+		Methods("GET")
+	router.
+		HandleFunc("/v1/views", handler.viewsHandler.CreateViews).
+		Methods("POST")
 	router.Use(loggingMiddleware)
 	http.Handle("/", router)
 	return router

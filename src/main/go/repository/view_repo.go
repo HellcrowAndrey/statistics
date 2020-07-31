@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	ViewProductColumn = "Products"
+	ViewProductColumn       = "Products"
 	ViewProductImagesColumn = "Products.Images"
 )
 
@@ -19,11 +19,11 @@ func NewViewRepo(database *gorm.DB) *ViewRepo {
 }
 
 func (repo ViewRepo) FindByAccountId(accountId uint) ([]*entity.View, error) {
-	var views [] *entity.View
+	var views []*entity.View
 	err := repo.database.
 		Preload(ViewProductColumn).
 		Preload(ViewProductImagesColumn).
-		Where("WHERE account_id = ?", accountId).
+		Where("account_id = ?", accountId).
 		Find(&views).Error
 	return views, err
 }
