@@ -30,6 +30,15 @@ func (controller *AccountsController) GetByUserId(userId uint) (*dto.AccountDto,
 	return nil, err
 }
 
+// CreateAccount godoc
+// @Summary Create a new account
+// @Description Create a new account with the input payload
+// @Tags accounts
+// @Accept  json
+// @Produce  json
+// @Param account body dto.AccountDto true "Create account"
+// @Success 201 {object} dto.AccountDto
+// @Router /v1/accounts [post]
 func (controller *AccountsController) CreateAccount(payload *dto.AccountDto) (*dto.AccountDto, error) {
 	account := utils.ToAccount(payload)
 	result, err := controller.accountService.CreateAccount(account)

@@ -27,10 +27,10 @@ func (handler *RestHandler) Handler() http.Handler {
 		HandleFunc("/v1/accounts", handler.accountHandler.CreateAccount).
 		Methods("POST")
 	router.
-		HandleFunc("/v1/purchase/{accountId}", handler.purchaseHandler.GetByAccountId).
+		HandleFunc("/v1/purchases/{accountId}", handler.purchaseHandler.GetByAccountId).
 		Methods("GET")
 	router.
-		HandleFunc("/v1/purchase", handler.purchaseHandler.CreatePurchase).
+		HandleFunc("/v1/purchases", handler.purchaseHandler.CreatePurchase).
 		Methods("POST")
 	router.
 		HandleFunc("/v1/logins/{accountId}", handler.loginHandler.GetByAccountId).

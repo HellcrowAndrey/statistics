@@ -25,7 +25,7 @@ func (handler *ViewsHandler) GetByAccountId(w http.ResponseWriter, r *http.Reque
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	payload, err := handler.controller.ReadByAccountId(uint(accountId))
+	payload, err := handler.controller.GetByAccountId(uint(accountId))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
