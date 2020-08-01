@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"github.com/gorilla/mux"
+	httpSwagger "github.com/swaggo/http-swagger"
 	"log"
 	"net/http"
 )
@@ -43,6 +44,7 @@ func (handler *RestHandler) Handler() http.Handler {
 	router.
 		HandleFunc("/v1/views", handler.viewsHandler.CreateViews).
 		Methods("POST")
+	router.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 	router.Use(loggingMiddleware)
 	http.Handle("/", router)
 	return router

@@ -14,6 +14,14 @@ func NewAccountController(service *services.AccountService) *AccountsController 
 	return &AccountsController{accountService: service}
 }
 
+// GetByUserId godoc
+// @Summary Get details of user account
+// @Description Get details of user account
+// @Tags accounts
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} dto.AccountDto
+// @Router /v1/accounts/{userId} [get]
 func (controller *AccountsController) GetByUserId(userId uint) (*dto.AccountDto, error) {
 	account, err := controller.accountService.ReadByUserId(userId)
 	if err == nil {
