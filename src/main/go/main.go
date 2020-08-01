@@ -6,7 +6,7 @@ import (
 	"./server"
 )
 
-// @title Orders API
+// @title Statistics API
 // @version 1.0
 // @description This is a sample service for managing statistics
 // @termsOfService http://swagger.io/terms/
