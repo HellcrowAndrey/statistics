@@ -60,7 +60,7 @@ func FromLogin(data *entity.Login) *dto.LoginDto {
 
 func FromView(data *entity.View) *dto.ViewDto {
 	array := data.Products
-	var products []*dto.ViewedProductDto
+	var products []*dto.ProductDto
 	for _, product := range array {
 		products = append(products, FromViewedProduct(product))
 	}
@@ -88,13 +88,13 @@ func FromProduct(data *entity.PurchaseProduct) *dto.ProductDto {
 	}
 }
 
-func FromViewedProduct(data *entity.ViewedProduct) *dto.ViewedProductDto {
+func FromViewedProduct(data *entity.ViewedProduct) *dto.ProductDto {
 	array := data.Images
 	var images []string
 	for _, i := range array {
 		images = append(images, i.Img)
 	}
-	return &dto.ViewedProductDto{
+	return &dto.ProductDto{
 		Id:           data.Id,
 		Name:         data.Name,
 		Price:        data.Price,
@@ -211,7 +211,7 @@ func ToProduct(data *dto.ProductDto) *entity.PurchaseProduct {
 	}
 }
 
-func ToViewedProduct(data *dto.ViewedProductDto) *entity.ViewedProduct {
+func ToViewedProduct(data *dto.ProductDto) *entity.ViewedProduct {
 	return &entity.ViewedProduct{
 		Id:           data.Id,
 		Name:         data.Name,
