@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"../logger"
+	log "../logger"
 	"encoding/json"
 	"net/http"
 )
@@ -17,6 +17,6 @@ func ResponseSender(w http.ResponseWriter, payload interface{}, status int) {
 	w.WriteHeader(status)
 	code, err := w.Write(response)
 	if err != nil {
-		logger.Error("Enter: ", code, err)
+		log.Error("Enter: ", code, err)
 	}
 }

@@ -27,7 +27,11 @@ func (handler *AccountsHandler) GetByUserId(w http.ResponseWriter, r *http.Reque
 		return
 	}
 	account, err := handler.controller.GetByUserId(uint(userId))
-	log.Debug("Account user information", account)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	log.Debug("Enter: ", account)
 	ResponseSender(w, account, http.StatusOK)
 }
 
@@ -39,6 +43,6 @@ func (handler *AccountsHandler) CreateAccount(w http.ResponseWriter, r *http.Req
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	log.Debug("Create new information ", account)
+	log.Debug("Enter: create new account ", account.Id)
 	ResponseSender(w, account, http.StatusCreated)
 }

@@ -27,11 +27,11 @@ func (handler *ViewsHandler) GetByAccountId(w http.ResponseWriter, r *http.Reque
 		return
 	}
 	views, err := handler.controller.GetByAccountId(uint(accountId))
-	log.Debug("Create new information ", views)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
+	log.Debug("Enter: ", views)
 	ResponseSender(w, views, http.StatusOK)
 }
 
@@ -43,6 +43,6 @@ func (handler *ViewsHandler) CreateViews(w http.ResponseWriter, r *http.Request)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	log.Debug("Create new information ", view)
+	log.Debug("Enter: ", view)
 	ResponseSender(w, view, http.StatusCreated)
 }

@@ -27,11 +27,11 @@ func (handler *PurchasesHandler) GetByAccountId(w http.ResponseWriter, r *http.R
 		return
 	}
 	purchase, err := handler.controller.GetByAccountId(uint(accountId))
-	log.Debug("Create new information ", purchase)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
+	log.Debug("Enter: ", purchase)
 	ResponseSender(w, purchase, http.StatusOK)
 }
 
@@ -43,10 +43,10 @@ func (handler *PurchasesHandler) CreatePurchase(w http.ResponseWriter, r *http.R
 		return
 	}
 	purchase, err := handler.controller.CreatePurchase(&payload)
-	log.Debug("Create new information ", purchase)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	log.Debug("Enter: ", purchase)
 	ResponseSender(w, purchase, http.StatusCreated)
 }
