@@ -1,11 +1,11 @@
 package entity
 
-type Image struct {
+type ViewedImage struct {
 	Id        uint   `gorm:"column:id"`
 	ProductId uint   `gorm:"column:product_id"`
 	Img       string `gorm:"column:image"`
 }
 
-func (image *Image) TableName() string {
-	return "images"
+func (image *ViewedImage) TableName() string {
+	return "viewed_images"
 }

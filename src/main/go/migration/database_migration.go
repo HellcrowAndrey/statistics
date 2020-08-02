@@ -28,15 +28,25 @@ func (container *DataBaseMigration) RunBuildDataBase() error {
 
 func createTables(connection *gorm.DB) error {
 	err := connection.DropTableIfExists(
-		&entity.Image{}, &entity.Product{},
-		&entity.Purchase{}, &entity.Login{},
-		&entity.View{}, &entity.Account{},
+		&entity.PurchaseImage{},
+		&entity.PurchaseProduct{},
+		&entity.Purchase{},
+		&entity.Login{},
+		&entity.ViewedProduct{},
+		&entity.ViewedImage{},
+		&entity.View{},
+		&entity.Account{},
 	).Error
 	if err == nil {
 		err = connection.CreateTable(
-			&entity.Image{}, &entity.Product{},
-			&entity.Purchase{}, &entity.Login{},
-			&entity.View{}, &entity.Account{},
+			&entity.PurchaseImage{},
+			&entity.PurchaseProduct{},
+			&entity.Purchase{},
+			&entity.Login{},
+			&entity.ViewedProduct{},
+			&entity.ViewedImage{},
+			&entity.View{},
+			&entity.Account{},
 		).Error
 	}
 	return err
@@ -44,9 +54,14 @@ func createTables(connection *gorm.DB) error {
 
 func updateTables(connection *gorm.DB) error {
 	err := connection.AutoMigrate(
-		&entity.Image{}, &entity.Product{},
-		&entity.Purchase{}, &entity.Login{},
-		&entity.View{}, &entity.Account{},
+		&entity.PurchaseImage{},
+		&entity.PurchaseProduct{},
+		&entity.Purchase{},
+		&entity.Login{},
+		&entity.ViewedProduct{},
+		&entity.ViewedImage{},
+		&entity.View{},
+		&entity.Account{},
 	).Error
 	return err
 }

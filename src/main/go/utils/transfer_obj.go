@@ -48,9 +48,9 @@ func FromLogin(data *entity.Login) *dto.LoginDto {
 
 func FromView(data *entity.View) *dto.ViewDto {
 	array := data.Products
-	var products []*dto.ProductDto
+	var products []*dto.ViewedProductDto
 	for _, product := range array {
-		products = append(products, FromProduct(product))
+		products = append(products, FromViewedProduct(product))
 	}
 	return &dto.ViewDto{
 		Id:        data.Id,
@@ -59,13 +59,30 @@ func FromView(data *entity.View) *dto.ViewDto {
 	}
 }
 
-func FromProduct(data *entity.Product) *dto.ProductDto {
+func FromProduct(data *entity.PurchaseProduct) *dto.ProductDto {
 	array := data.Images
 	var images []string
 	for _, i := range array {
 		images = append(images, i.Img)
 	}
 	return &dto.ProductDto{
+		Id:           data.Id,
+		Name:         data.Name,
+		Price:        data.Price,
+		Quantity:     data.Quantity,
+		Description:  data.Description,
+		PreviewImage: data.PreviewImage,
+		Images:       images,
+	}
+}
+
+func FromViewedProduct(data *entity.ViewedProduct) *dto.ViewedProductDto {
+	array := data.Images
+	var images []string
+	for _, i := range array {
+		images = append(images, i.Img)
+	}
+	return &dto.ViewedProductDto{
 		Id:           data.Id,
 		Name:         data.Name,
 		Price:        data.Price,
@@ -120,7 +137,7 @@ func ToAccount(data *dto.AccountDto) *entity.Account {
 
 func ToPurchase(data *dto.PurchaseDto) *entity.Purchase {
 	array := data.Products
-	var products []*entity.Product
+	var products []*entity.PurchaseProduct
 	for _, product := range array {
 		products = append(products, ToProduct(product))
 	}
@@ -146,9 +163,9 @@ func ToLogin(data *dto.LoginDto) *entity.Login {
 
 func ToView(data *dto.ViewDto) *entity.View {
 	array := data.Products
-	var products []*entity.Product
+	var products []*entity.ViewedProduct
 	for _, product := range array {
-		products = append(products, ToProduct(product))
+		products = append(products, ToViewedProduct(product))
 	}
 	return &entity.View{
 		Id:        data.Id,
@@ -158,8 +175,8 @@ func ToView(data *dto.ViewDto) *entity.View {
 	}
 }
 
-func ToProduct(data *dto.ProductDto) *entity.Product {
-	return &entity.Product{
+func ToProduct(data *dto.ProductDto) *entity.PurchaseProduct {
+	return &entity.PurchaseProduct{
 		Id:           data.Id,
 		Name:         data.Name,
 		Price:        data.Price,
@@ -170,10 +187,30 @@ func ToProduct(data *dto.ProductDto) *entity.Product {
 	}
 }
 
-func ToImages(data []string) []*entity.Image {
-	var images []*entity.Image
+func ToViewedProduct(data *dto.ViewedProductDto) *entity.ViewedProduct {
+	return &entity.ViewedProduct{
+		Id:           data.Id,
+		Name:         data.Name,
+		Price:        data.Price,
+		Quantity:     data.Quantity,
+		Description:  data.Description,
+		PreviewImage: data.PreviewImage,
+		Images:       ToViewedImages(data.Images),
+	}
+}
+
+func ToImages(data []string) []*entity.PurchaseImage {
+	var images []*entity.PurchaseImage
 	for _, i := range data {
-		images = append(images, &entity.Image{Img: i})
+		images = append(images, &entity.PurchaseImage{Img: i})
+	}
+	return images
+}
+
+func ToViewedImages(data []string) []*entity.ViewedImage {
+	var images []*entity.ViewedImage
+	for _, i := range data {
+		images = append(images, &entity.ViewedImage{Img: i})
 	}
 	return images
 }
