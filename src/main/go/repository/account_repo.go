@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	PurchasesColumn = "Purchases"
-	PurchaseProductsColumn = "Purchases.Products"
+	PurchasesColumn             = "Purchases"
+	PurchaseProductsColumn      = "Purchases.Products"
 	PurchaseProductImagesColumn = "Purchases.Products.Images"
-	LoginsColumn = "Logins"
-	ViewsColumn = "Views"
-	ViewsProductColumn = "Views.Products"
-	ViewsProductImagesColumn = "Views.Products.Images"
+	PurchaseCustomerColumn      = "Purchases.Customer"
+	LoginsColumn                = "Logins"
+	ViewsColumn                 = "Views"
+	ViewsProductColumn          = "Views.Products"
+	ViewsProductImagesColumn    = "Views.Products.Images"
 )
 
 type AccountRepo struct {
@@ -28,6 +29,7 @@ func (repo *AccountRepo) FindByUserId(userId uint) (*entity.Account, error) {
 	err := repo.database.
 		Preload(PurchasesColumn).
 		Preload(PurchaseProductsColumn).
+		Preload(PurchaseCustomerColumn).
 		Preload(PurchaseProductImagesColumn).
 		Preload(LoginsColumn).
 		Preload(ViewsColumn).

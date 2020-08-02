@@ -7,6 +7,7 @@ import (
 
 const (
 	ProductColumn        = "Products"
+	CustomerColumn       = "Customer"
 	ProductsImagesColumn = "Products.Images"
 )
 
@@ -22,6 +23,7 @@ func (repo *PurchaseRepo) FindByAccountId(accountId uint) ([]*entity.Purchase, e
 	var data []*entity.Purchase
 	err := repo.database.
 		Preload(ProductColumn).
+		Preload(CustomerColumn).
 		Preload(ProductsImagesColumn).
 		Where("account_id = ?", accountId).
 		Find(&data).Error
