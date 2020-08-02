@@ -31,7 +31,7 @@ func (handler *AccountsHandler) GetByUserId(w http.ResponseWriter, r *http.Reque
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	log.Debug("Enter: ", account)
+	log.Debug("Enter: read account information success ")
 	ResponseSender(w, account, http.StatusOK)
 }
 
@@ -43,6 +43,6 @@ func (handler *AccountsHandler) CreateAccount(w http.ResponseWriter, r *http.Req
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	log.Debug("Enter: create new account ", account.Id)
+	log.Debug("Enter: create new account success")
 	ResponseSender(w, account, http.StatusCreated)
 }

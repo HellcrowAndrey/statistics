@@ -31,7 +31,7 @@ func (handler *ViewsHandler) GetByAccountId(w http.ResponseWriter, r *http.Reque
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
-	log.Debug("Enter: ", views)
+	log.Debug("Enter: read all views information by account id")
 	ResponseSender(w, views, http.StatusOK)
 }
 
@@ -43,6 +43,6 @@ func (handler *ViewsHandler) CreateViews(w http.ResponseWriter, r *http.Request)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	log.Debug("Enter: ", view)
+	log.Debug("Enter: create new view by account id")
 	ResponseSender(w, view, http.StatusCreated)
 }

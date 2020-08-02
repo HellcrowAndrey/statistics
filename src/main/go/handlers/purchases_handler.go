@@ -31,7 +31,7 @@ func (handler *PurchasesHandler) GetByAccountId(w http.ResponseWriter, r *http.R
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
-	log.Debug("Enter: ", purchase)
+	log.Debug("Enter: read all purchase information by account id")
 	ResponseSender(w, purchase, http.StatusOK)
 }
 
@@ -47,6 +47,6 @@ func (handler *PurchasesHandler) CreatePurchase(w http.ResponseWriter, r *http.R
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	log.Debug("Enter: ", purchase)
+	log.Debug("Enter: create new purchase by account id success")
 	ResponseSender(w, purchase, http.StatusCreated)
 }
