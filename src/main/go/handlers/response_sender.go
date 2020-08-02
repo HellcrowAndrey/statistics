@@ -17,6 +17,6 @@ func ResponseSender(w http.ResponseWriter, payload interface{}, status int) {
 	w.WriteHeader(status)
 	code, err := w.Write(response)
 	if err != nil {
-		logger.Error.Println("Enter: ", code, err)
+		logger.Error("Enter: ", code, err)
 	}
 }

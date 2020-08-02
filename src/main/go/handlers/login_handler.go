@@ -3,6 +3,7 @@ package handlers
 import (
 	"../controllers"
 	"../dto"
+	log "../logger"
 	"encoding/json"
 	"github.com/gorilla/mux"
 	"net/http"
@@ -26,16 +27,18 @@ func (handler *LoginHandler) GetByAccountId(w http.ResponseWriter, r *http.Reque
 		return
 	}
 	account, err := handler.controller.GetByAccountId(uint(accountId))
+	log.Debug("Create new information ", account)
 	ResponseSender(w, account, http.StatusOK)
 }
 
 func (handler *LoginHandler) CreateLogin(w http.ResponseWriter, r *http.Request) {
 	var payload dto.LoginDto
 	err := json.NewDecoder(r.Body).Decode(&payload)
-	result, err := handler.controller.CreateLogin(&payload)
+	login, err := handler.controller.CreateLogin(&payload)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	ResponseSender(w, result, http.StatusCreated)
+	log.Debug("Create new information ", login)
+	ResponseSender(w, login, http.StatusCreated)
 }

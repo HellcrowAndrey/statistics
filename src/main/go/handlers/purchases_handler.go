@@ -3,6 +3,7 @@ package handlers
 import (
 	"../controllers"
 	"../dto"
+	log "../logger"
 	"encoding/json"
 	"github.com/gorilla/mux"
 	"net/http"
@@ -25,12 +26,13 @@ func (handler *PurchasesHandler) GetByAccountId(w http.ResponseWriter, r *http.R
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	payload, err := handler.controller.GetByAccountId(uint(accountId))
+	purchase, err := handler.controller.GetByAccountId(uint(accountId))
+	log.Debug("Create new information ", purchase)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
-	ResponseSender(w, payload, http.StatusOK)
+	ResponseSender(w, purchase, http.StatusOK)
 }
 
 func (handler *PurchasesHandler) CreatePurchase(w http.ResponseWriter, r *http.Request) {
@@ -40,10 +42,11 @@ func (handler *PurchasesHandler) CreatePurchase(w http.ResponseWriter, r *http.R
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	result, err := handler.controller.CreatePurchase(&payload)
+	purchase, err := handler.controller.CreatePurchase(&payload)
+	log.Debug("Create new information ", purchase)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	ResponseSender(w, result, http.StatusCreated)
+	ResponseSender(w, purchase, http.StatusCreated)
 }

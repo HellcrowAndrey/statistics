@@ -23,5 +23,6 @@
     "StatusPageUrl": "http://127.0.0.1:8080/info",
     "HealthCheckUrl": "http://127.0.0.1:8080/health",
     "EnableEureka": false
-  }
+  },
+  "LoggerLvl": "debug, info, error"
 }

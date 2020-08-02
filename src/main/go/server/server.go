@@ -33,6 +33,6 @@ func (server *Server) Run() {
 	}
 	err = httpServer.ListenAndServe()
 	if err != nil {
-		logger.Error.Println("Server crashed!")
+		logger.Error("Server crashed!")
 	}
 }

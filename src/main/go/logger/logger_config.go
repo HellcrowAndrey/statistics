@@ -4,12 +4,15 @@ import (
 	"../config"
 	"log"
 	"os"
+	"strings"
 )
 
 var (
-	Info    *log.Logger
-	Warning *log.Logger
-	Error   *log.Logger
+	levels     string
+	InfoLvl    *log.Logger
+	WarningLvl *log.Logger
+	ErrorLvl   *log.Logger
+	DebugLvl   *log.Logger
 )
 
 type Logger struct {
@@ -26,12 +29,39 @@ func (logger *Logger) InitLogger() {
 		if err != nil {
 			panic(err.Error())
 		}
-		Info = log.New(file, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
-		Warning = log.New(file, "WARN: ", log.Ldate|log.Ltime|log.Lshortfile)
-		Error = log.New(file, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
+		InfoLvl = log.New(file, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
+		WarningLvl = log.New(file, "WARN: ", log.Ldate|log.Ltime|log.Lshortfile)
+		ErrorLvl = log.New(file, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
+		DebugLvl = log.New(file, "DEBUG: ", log.Ldate|log.Ltime|log.Lshortfile)
 	} else {
-		Info = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
-		Warning = log.New(os.Stdout, "WARN: ", log.Ldate|log.Ltime|log.Lshortfile)
-		Error = log.New(os.Stdout, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
+		InfoLvl = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
+		WarningLvl = log.New(os.Stdout, "WARN: ", log.Ldate|log.Ltime|log.Lshortfile)
+		ErrorLvl = log.New(os.Stdout, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
+		DebugLvl = log.New(os.Stdout, "DEBUG: ", log.Ldate|log.Ltime|log.Lshortfile)
+	}
+	levels = logger.config.LoggerLvl
+}
+
+func Debug(values ...interface{}) {
+	if strings.Contains(levels, "debug") {
+		DebugLvl.Println(values)
+	}
+}
+
+func Warning(values ...interface{}) {
+	if strings.Contains(levels, "warning") {
+		WarningLvl.Println(values)
+	}
+}
+
+func Info(values ...interface{}) {
+	if strings.Contains(levels, "info") {
+		InfoLvl.Println(values)
+	}
+}
+
+func Error(values ...interface{}) {
+	if strings.Contains(levels, "error") {
+		InfoLvl.Println(values)
 	}
 }

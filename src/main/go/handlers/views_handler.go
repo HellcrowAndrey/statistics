@@ -3,6 +3,7 @@ package handlers
 import (
 	"../controllers"
 	"../dto"
+	log "../logger"
 	"encoding/json"
 	"github.com/gorilla/mux"
 	"net/http"
@@ -25,21 +26,23 @@ func (handler *ViewsHandler) GetByAccountId(w http.ResponseWriter, r *http.Reque
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	payload, err := handler.controller.GetByAccountId(uint(accountId))
+	views, err := handler.controller.GetByAccountId(uint(accountId))
+	log.Debug("Create new information ", views)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
-	ResponseSender(w, payload, http.StatusOK)
+	ResponseSender(w, views, http.StatusOK)
 }
 
 func (handler *ViewsHandler) CreateViews(w http.ResponseWriter, r *http.Request) {
 	var payload dto.ViewDto
 	err := json.NewDecoder(r.Body).Decode(&payload)
-	result, err := handler.controller.CreateView(&payload)
+	view, err := handler.controller.CreateView(&payload)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	ResponseSender(w, result, http.StatusCreated)
+	log.Debug("Create new information ", view)
+	ResponseSender(w, view, http.StatusCreated)
 }

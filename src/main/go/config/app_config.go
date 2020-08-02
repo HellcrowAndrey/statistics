@@ -19,6 +19,7 @@ type Config struct {
 	ServerPort     string
 	DatabaseConfig DatabaseConfig
 	EurekaConfig   EurekaConfig
+	LoggerLvl      string
 }
 
 type DatabaseConfig struct {
