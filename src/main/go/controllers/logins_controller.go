@@ -20,6 +20,7 @@ func NewLoginsController(service *services.LoginService) *LoginsController {
 // @Tags logins
 // @Accept  json
 // @Produce  json
+// @Param accountId path integer true "Account ID"
 // @Success 200 {object} dto.LoginDto
 // @Router /v1/logins/{accountId} [get]
 func (controller *LoginsController) GetByAccountId(accountId uint) (*dto.LoginDto, error) {

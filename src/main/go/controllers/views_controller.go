@@ -20,6 +20,7 @@ func NewViewsController(service *services.ViewService) *ViewsController {
 // @Tags views
 // @Accept  json
 // @Produce  json
+// @Param accountId path integer true "Account ID"
 // @Success 200 {object} dto.ViewDto
 // @Router /v1/views/{accountId} [get]
 func (controller *ViewsController) GetByAccountId(accountId uint) ([]*dto.ViewDto, error) {

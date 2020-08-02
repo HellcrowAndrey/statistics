@@ -20,6 +20,7 @@ func NewPurchasesController(purchaseService *services.PurchaseService) *Purchase
 // @Tags purchases
 // @Accept  json
 // @Produce  json
+// @Param accountId path integer true "Account ID"
 // @Success 200 {object} dto.PurchaseDto
 // @Router /v1/purchase/{accountId} [get]
 func (controller *PurchasesController) GetByAccountId(accountId uint) ([]*dto.PurchaseDto, error) {

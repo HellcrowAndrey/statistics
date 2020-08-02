@@ -20,6 +20,7 @@ func NewAccountController(service *services.AccountService) *AccountsController 
 // @Tags accounts
 // @Accept  json
 // @Produce  json
+// @Param userId path integer true "User ID"
 // @Success 200 {object} dto.AccountDto
 // @Router /v1/accounts/{userId} [get]
 func (controller *AccountsController) GetByUserId(userId uint) (*dto.AccountDto, error) {
