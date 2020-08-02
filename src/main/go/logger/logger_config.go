@@ -1,6 +1,7 @@
-package config
+package logger
 
 import (
+	"../config"
 	"log"
 	"os"
 )
@@ -12,10 +13,10 @@ var (
 )
 
 type Logger struct {
-	config *Config
+	config *config.Config
 }
 
-func NewLogger(config *Config) *Logger {
+func NewLogger(config *config.Config) *Logger {
 	return &Logger{config: config}
 }
 

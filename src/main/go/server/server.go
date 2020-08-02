@@ -3,21 +3,21 @@ package server
 import (
 	"../config"
 	"../handlers"
+	"../logger"
 	"../migration"
 	"../services"
-	"log"
 	"net/http"
 )
 
 type Server struct {
 	config            *config.Config
-	logger            *config.Logger
+	logger            *logger.Logger
 	handler           *handlers.RestHandler
 	eurekaService     *services.EurekaService
 	dataBaseContainer *migration.DataBaseMigration
 }
 
-func NewServer(config *config.Config, logger *config.Logger, handler *handlers.RestHandler, eurekaService *services.EurekaService, dataBaseContainer *migration.DataBaseMigration) *Server {
+func NewServer(config *config.Config, logger *logger.Logger, handler *handlers.RestHandler, eurekaService *services.EurekaService, dataBaseContainer *migration.DataBaseMigration) *Server {
 	return &Server{config: config, logger: logger, handler: handler, eurekaService: eurekaService, dataBaseContainer: dataBaseContainer}
 }
 
@@ -33,6 +33,6 @@ func (server *Server) Run() {
 	}
 	err = httpServer.ListenAndServe()
 	if err != nil {
-		log.Fatal("Server crashed!")
+		logger.Error.Println("Server crashed!")
 	}
 }

@@ -24,10 +24,10 @@ func NewAccountController(service *services.AccountService) *AccountsController 
 // @Router /v1/accounts/{userId} [get]
 func (controller *AccountsController) GetByUserId(userId uint) (*dto.AccountDto, error) {
 	account, err := controller.accountService.ReadByUserId(userId)
-	if err == nil {
-		return utils.FromAccount(account), nil
+	if err != nil {
+		return nil, err
 	}
-	return nil, err
+	return utils.FromAccount(account), nil
 }
 
 // CreateAccount godoc

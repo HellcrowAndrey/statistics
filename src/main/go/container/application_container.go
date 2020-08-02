@@ -4,6 +4,7 @@ import (
 	"../config"
 	"../controllers"
 	"../handlers"
+	"../logger"
 	"../migration"
 	"../repository"
 	"../server"
@@ -14,7 +15,7 @@ import (
 func BuildContainer() *dig.Container {
 	container := dig.New()
 	err := container.Provide(config.NewConfig)
-	err = container.Provide(config.NewLogger)
+	err = container.Provide(logger.NewLogger)
 	err = container.Provide(config.ConnectDatabase)
 	err = container.Provide(migration.NewDataBaseMigration)
 
@@ -39,7 +40,6 @@ func BuildContainer() *dig.Container {
 	err = container.Provide(handlers.NewPurchasesHandler)
 	err = container.Provide(handlers.NewLoginHandler)
 	err = container.Provide(handlers.NewViewsHandler)
-	err = container.Provide(config.NewLogger)
 
 	err = container.Provide(server.NewServer)
 
