@@ -31,8 +31,20 @@ func FromPurchase(data *entity.Purchase) *dto.PurchaseDto {
 	return &dto.PurchaseDto{
 		Id:        data.Id,
 		CreatedAt: data.CreatedAt,
-		OrderId:   data.OrderId,
+		Customer:  FromCustomer(data.Customer),
 		Products:  products,
+	}
+}
+
+func FromCustomer(data *entity.Customer) *dto.CustomerDto {
+	return &dto.CustomerDto{
+		Id:              data.Id,
+		PurchaseId:      data.PurchaseId,
+		CreatedAt:       data.CreatedAt,
+		CustomerName:    data.CustomerName,
+		CustomerAddress: data.CustomerAddress,
+		CustomerEmail:   data.CustomerEmail,
+		CustomerPhone:   data.CustomerPhone,
 	}
 }
 
@@ -144,9 +156,21 @@ func ToPurchase(data *dto.PurchaseDto) *entity.Purchase {
 	return &entity.Purchase{
 		Id:        data.Id,
 		CreatedAt: data.CreatedAt,
-		OrderId:   data.OrderId,
+		Customer:  ToCustomer(data.Customer),
 		AccountId: data.AccountId,
 		Products:  products,
+	}
+}
+
+func ToCustomer(data *dto.CustomerDto) *entity.Customer {
+	return &entity.Customer{
+		Id:              data.Id,
+		PurchaseId:      data.PurchaseId,
+		CreatedAt:       data.CreatedAt,
+		CustomerName:    data.CustomerName,
+		CustomerAddress: data.CustomerAddress,
+		CustomerEmail:   data.CustomerEmail,
+		CustomerPhone:   data.CustomerPhone,
 	}
 }
 
