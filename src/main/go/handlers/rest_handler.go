@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"../config"
 	"github.com/gorilla/mux"
 	httpSwagger "github.com/swaggo/http-swagger"
 	"log"
@@ -12,10 +13,11 @@ type RestHandler struct {
 	purchaseHandler *PurchasesHandler
 	loginHandler    *LoginHandler
 	viewsHandler    *ViewsHandler
+	config          *config.Config
 }
 
-func NewRestHandler(accountHandler *AccountsHandler, purchaseHandler *PurchasesHandler, loginHandler *LoginHandler, viewsHandler *ViewsHandler) *RestHandler {
-	return &RestHandler{accountHandler: accountHandler, purchaseHandler: purchaseHandler, loginHandler: loginHandler, viewsHandler: viewsHandler}
+func NewRestHandler(accountHandler *AccountsHandler, purchaseHandler *PurchasesHandler, loginHandler *LoginHandler, viewsHandler *ViewsHandler, config *config.Config) *RestHandler {
+	return &RestHandler{accountHandler: accountHandler, purchaseHandler: purchaseHandler, loginHandler: loginHandler, viewsHandler: viewsHandler, config: config}
 }
 
 func (handler *RestHandler) Handler() http.Handler {
@@ -44,7 +46,9 @@ func (handler *RestHandler) Handler() http.Handler {
 	router.
 		HandleFunc("/v1/views", handler.viewsHandler.CreateViews).
 		Methods("POST")
-	router.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
+	if handler.config.IsSwaggerEnable {
+		router.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
+	}
 	router.Use(loggingMiddleware)
 	http.Handle("/", router)
 	return router

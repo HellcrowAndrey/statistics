@@ -15,11 +15,12 @@ const (
 )
 
 type Config struct {
-	IsLoggerFile   bool
-	ServerPort     string
-	DatabaseConfig DatabaseConfig
-	EurekaConfig   EurekaConfig
-	LoggerLvl      string
+	IsLoggerFile    bool
+	ServerPort      string
+	DatabaseConfig  DatabaseConfig
+	EurekaConfig    EurekaConfig
+	LoggerLvl       string
+	IsSwaggerEnable bool
 }
 
 type DatabaseConfig struct {

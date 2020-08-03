@@ -22,3 +22,7 @@ Step 1.
     /src/main/go swag init
 Step 2.
     add import to main file _ "./docs"  
+
+
+Build application:
+     go build -o /home/basedir/statistics/statistics
