@@ -6,7 +6,7 @@
     "DatabasePort": 5432,
     "DatabaseUser": "user",
     "DatabasePassword": "password",
-    "DatabaseName": "statistics_dev.db",
+    "DatabaseName": "statistics_default.db",
     "DdlAuto": "create",
     "MaxIdleConns": 10,
     "MaxOpenConns": 100
