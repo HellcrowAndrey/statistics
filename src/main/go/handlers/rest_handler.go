@@ -16,14 +16,21 @@ type RestHandler struct {
 	config          *config.Config
 }
 
-func NewRestHandler(accountHandler *AccountsHandler, purchaseHandler *PurchasesHandler, loginHandler *LoginHandler, viewsHandler *ViewsHandler, config *config.Config) *RestHandler {
-	return &RestHandler{accountHandler: accountHandler, purchaseHandler: purchaseHandler, loginHandler: loginHandler, viewsHandler: viewsHandler, config: config}
+func NewRestHandler(
+	accountHandler *AccountsHandler, purchaseHandler *PurchasesHandler,
+	loginHandler *LoginHandler, viewsHandler *ViewsHandler, config *config.Config) *RestHandler {
+	return &RestHandler{
+		accountHandler:  accountHandler,
+		purchaseHandler: purchaseHandler,
+		loginHandler:    loginHandler,
+		viewsHandler:    viewsHandler,
+		config:          config}
 }
 
 func (handler *RestHandler) Handler() http.Handler {
 	router := mux.NewRouter()
 	router.
-		HandleFunc("/v1/accounts/info/{userId}", handler.accountHandler.GetByUserId).
+		HandleFunc("/v1/accounts/{userId}", handler.accountHandler.GetByUserId).
 		Methods("GET")
 	router.
 		HandleFunc("/v1/accounts", handler.accountHandler.CreateAccount).
