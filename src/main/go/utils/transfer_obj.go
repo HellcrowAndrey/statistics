@@ -155,9 +155,10 @@ func ToPurchase(data *dto.PurchaseDto) *entity.Purchase {
 	}
 	return &entity.Purchase{
 		Id:        data.Id,
+		AccountId: data.AccountId,
+		OrderId:   data.OrderId,
 		CreatedAt: data.CreatedAt,
 		Customer:  ToCustomer(data.Customer),
-		AccountId: data.AccountId,
 		Products:  products,
 	}
 }
