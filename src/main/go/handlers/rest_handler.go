@@ -23,7 +23,7 @@ func NewRestHandler(accountHandler *AccountsHandler, purchaseHandler *PurchasesH
 func (handler *RestHandler) Handler() http.Handler {
 	router := mux.NewRouter()
 	router.
-		HandleFunc("/v1/accounts/{userId}", handler.accountHandler.GetByUserId).
+		HandleFunc("/v1/accounts/info/{userId}", handler.accountHandler.GetByUserId).
 		Methods("GET")
 	router.
 		HandleFunc("/v1/accounts", handler.accountHandler.CreateAccount).
